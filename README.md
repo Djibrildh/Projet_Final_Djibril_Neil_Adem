@@ -1,52 +1,57 @@
-Projet Final : Segmentation des Modes de Vie Urbains
-Ce projet consiste en une étude collaborative de Data Science visant à analyser et regrouper 300 villes mondiales selon des indicateurs de qualité de vie. L'objectif technique est de comparer trois méthodes de réduction de dimension (PCA, t-SNE, UMAP) en utilisant la métrique de Trustworthiness (fidélité).
-Structure du Répertoire
-Conformément aux exigences de l'examen, le projet est organisé de la manière suivante:
-.
-├── data/                       # Dataset fourni pour l'étude 
-│   └── city_lifestyle_dataset.csv
-├── notebooks/                  # Expérimentations par méthode 
-│   ├── pca.ipynb               
-│   ├── tsne.ipynb              
-│   └── umap.ipynb              
-├── outputs/                    # Projections 2D exportées 
-│   ├── pca_emb_2d.csv
-│   ├── tsne_emb_2d.csv
-│   └── umap_emb_2d.csv
-├── evaluate.py                 # Script de calcul de trustworthiness 
-├── Dockerfile                  # Configuration pour la conteneurisation 
-└── README.md                   # Documentation (ce fichier) 
+# [cite_start]Projet Final : Segmentation des Modes de Vie Urbains [cite: 1]
 
-Méthodologie et Workflow Git
-Le développement a suivi un flux collaboratif strict basé sur des branches thématiques:
-•	Branches de fonctionnalités : Chaque méthode a été développée sur une branche dédiée (method/PCA, method/T-SNE, method/UMAP).
-•	Gestion des versions : Chaque branche contient au moins deux commits pour tracer l'évolution du travail.
-•	Intégration : Les contributions ont été fusionnées dans la branche main via des Pull Requests.
+[cite_start]Ce projet simule un environnement de travail collaboratif en Data Science, reposant sur l'utilisation de Git pour la gestion du développement et de Docker pour la conteneurisation des résultats[cite: 5, 7]. [cite_start]L'objectif est d'analyser un jeu de données de villes à travers différentes méthodes de réduction de dimension[cite: 6].
 
-Analyse des Réductions de Dimension
-L'objectif est de projeter les 8 variables initiales du dataset vers un espace en 2 dimensions pour faciliter la visualisation.
-1. PCA (Analyse en Composantes Principales)
-•	Approche : Méthode linéaire cherchant à capturer le maximum de variance.
-•	Observation : Utile pour voir la structure globale, mais peut écraser certains détails locaux complexes.
-2. t-SNE
-•	Approche : Technique non-linéaire optimisant les voisinages locaux.
-•	Observation : Très efficace pour faire apparaître des clusters distincts de villes ayant des profils similaires.
-3. UMAP
-•	Approche : Fondée sur la géométrie riemannienne, elle préserve souvent mieux la structure globale que le t-SNE tout en étant performante sur la structure locale.
-________________________________________
-Évaluation (Trustworthiness)
-Le script evaluate.py charge les fichiers situés dans outputs/ et calcule le score de fidélité:
-•	Définition : Elle mesure si les points proches dans l'espace d'origine restent proches après réduction.
-•	Interprétation : Une valeur proche de 1 indique que la structure locale est bien préservée. Une valeur faible indique une déformation importante des voisinages.
+## [cite_start]Structure du Repertoire [cite: 12]
 
-Déploiement avec Docker
-Le projet est conteneurisé pour assurer une exécution reproductible du script de comparaison.
-Construction de l'image
-docker build -t city-segmentation-app .
-Exécution du script de comparaison
-docker run --rm city-segmentation-app
-Options avancées (Bonus)
-•	Persistance des données : Pour mettre à jour les exports sans reconstruire l'image, utilisez un volume: docker run --rm -v $(pwd)/outputs:/app/outputs city-segmentation-app
-•	Développement en local : Le montage de volume permet de travailler en temps réel sur le code tout en restant dans l'environnement Docker.
+[cite_start]L'organisation du projet respecte l'arborescence suivante pour garantir la clarté des contributions[cite: 13]:
 
+* [cite_start]**data/** : Contient le jeu de données initial (city_lifestyle_dataset.csv)[cite: 14].
+* [cite_start]**notebooks/** : Regroupe les fichiers Jupyter d'exploration pour chaque méthode (pca.ipynb, tsne.ipynb, umap.ipynb)[cite: 15].
+* [cite_start]**outputs/** : Contient les exports des projections en 2 dimensions au format CSV (pca_emb_2d.csv, tsne_emb_2d.csv, umap_emb_2d.csv)[cite: 18, 19, 20].
+* [cite_start]**evaluate.py** : Script Python dédié au calcul de la métrique de performance[cite: 16, 50].
+* [cite_start]**Dockerfile** : Fichier de configuration pour la création de l'image Docker[cite: 21, 52].
+* [cite_start]**README.md** : Documentation générale du projet[cite: 23].
 
+## [cite_start]Methodes de Reduction de Dimension [cite: 31]
+
+[cite_start]Chaque méthode a été implémentée dans une branche dédiée à partir de la branche principale[cite: 32, 33]:
+
+* [cite_start]**PCA (Analyse en Composantes Principales)**[cite: 33].
+* [cite_start]**t-SNE (t-Distributed Stochastic Neighbor Embedding)**[cite: 33].
+* [cite_start]**UMAP (Uniform Manifold Approximation and Projection)**[cite: 33].
+
+[cite_start]Chaque notebook contient la projection des données en 2 dimensions, une visualisation graphique, une observation sur la structure obtenue et l'export des données réduites[cite: 36, 37].
+
+## [cite_start]Evaluation : Trustworthiness [cite: 38, 41]
+
+[cite_start]La comparaison des méthodes s'appuie sur la métrique de **trustworthiness**[cite: 40].
+* [cite_start]Cette métrique mesure dans quelle mesure les relations de voisinage de l'espace original sont préservées dans l'espace réduit[cite: 42].
+* [cite_start]Une valeur proche de 1 indique une excellente conservation de la structure locale[cite: 45].
+* [cite_start]Le script `evaluate.py` charge les fichiers CSV du dossier outputs et affiche les scores pour chaque méthode[cite: 50].
+
+## [cite_start]Workflow Git et Collaboration [cite: 5]
+
+[cite_start]Le développement a suivi une méthodologie collaborative stricte[cite: 12]:
+* [cite_start]**Gestion des branches** : Utilisation de branches nommées selon la fonctionnalité (ex: method/PCA, method/T-SNE, feat/docker)[cite: 24, 25, 26, 28].
+* [cite_start]**Commits** : Chaque branche contient au moins 2 commits[cite: 10].
+* [cite_start]**Pull Requests** : Les contributions ont été fusionnées dans la branche main via des Pull Requests après validation[cite: 11].
+
+## [cite_start]Utilisation avec Docker [cite: 51]
+
+[cite_start]Le projet est conteneurisé pour permettre l'exécution du script de comparaison directement depuis la branche main[cite: 53].
+
+Execution du script
+Bash
+docker run --rm projet-final-ds
+Developpement avec volumes (Bonus) 
+
+Pour permettre la mise à jour du code ou des données sans reconstruire l'image, ou pour travailler en local avec l'environnement Docker, un volume peut être monté :
+
+Bash
+docker run --rm -v $(pwd):/app projet-final-ds
+
+Souhaitez-vous que je vous aide à présent pour la rédaction du `Dockerfile` ou pour compléter les o
+### Construction de l'image
+```bash
+docker build -t projet-final-ds .
