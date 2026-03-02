@@ -31,3 +31,19 @@ plt.show()
 
 # Save reduced data
 tsne_df.to_csv("data/tsne_output.csv", index=False)
+
+# ==============================
+# Analyse des résultats
+# ==============================
+
+# Après réduction de dimension avec t-SNE, on passe de 8 variables initiales
+# à seulement 2 composantes (TSNE1 et TSNE2).
+
+# En observant le nuage de points obtenu, on remarque que les données
+# forment des groupes plus nets et mieux séparés dans l’espace 2D.
+
+# On distingue environ 4 à 5 zones de forte densité,
+# ce qui suggère l’existence de profils de villes bien différenciés.
+
+# La réduction de dimension met donc en évidence
+# des structures cachées dans les données.
