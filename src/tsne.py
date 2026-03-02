@@ -31,3 +31,9 @@ plt.show()
 
 # Save reduced data
 tsne_df.to_csv("data/tsne_output.csv", index=False)
+
+'''
+Après réduction de dimension avec t-SNE, on passe de 8 colonnes à 2. 
+En regardant le nuage de points, on remarque que les points forment des groupes beaucoup plus nets et écartés. 
+On distingue clairement 4 ou 5 fortes densités, ce qui met bien en évidence des profils de villes très différents.
+'''
